@@ -26,16 +26,16 @@ them to OpenCV images (aka numpy arrays).
 `test.py` *only* reproduces the problem when run via `stbt run` with
 `decklinksrc`, or when `decklinksrc` is running (even in a separate process):
 
-                                                    slave1  slave2  slave1+9.7.3  slave2+9.7.3
---------------------------------------------------  ------  ------  ------------  ------------
-stbt run (decklinksrc) test.py                      x 1-50  x 2.1k  ✓ 31k...      ✓ 17k...
-stbt run (v4l2src) test.py                          ✓ 650k
-nohup python test.py &                              ✓ 12k   ✓ 26k
-stbt tv (decklinksrc) & python test.py              ✓ 1k
-                                                    x 2
-                                                    x 1.3k
-stbt run (decklinksrc) sleep.py & python test.py    x 1.6k
-stbt run (decklinksrc) sleep.py & python test.py &  x 50
+                                                        slave1  slave2  slave1+9.7.3  slave2+9.7.3
+    --------------------------------------------------  ------  ------  ------------  ------------
+    stbt run (decklinksrc) test.py                      x 1-50  x 2.1k  ✓ 31k...      ✓ 17k...
+    stbt run (v4l2src) test.py                          ✓ 650k
+    nohup python test.py &                              ✓ 12k   ✓ 26k
+    stbt tv (decklinksrc) & python test.py              ✓ 1k
+                                                        x 2
+                                                        x 1.3k
+    stbt run (decklinksrc) sleep.py & python test.py    x 1.6k
+    stbt run (decklinksrc) sleep.py & python test.py &  x 50
 
 
 Note that `stbt run` runs the GStreamer pipeline, and listens for messages,
