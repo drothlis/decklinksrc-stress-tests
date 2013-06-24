@@ -4,6 +4,9 @@ incorrect results because OpenCV's `matchTemplate` gives the wrong output, but
 only when using `decklinksrc` (the GStreamer element for Blackmagic
 video-capture cards).
 
+**FIXED by upgrading blackmagic driver from 9.7 to 9.7.3 (the release notes
+only say "General performance and stability improvements").**
+
 `*.png` are debug images from a real stbt script that show the problem. See
 the missing areas in `source_matchtemplate.png`.
 `source_matchtemplate_CORRECT.png` is what the result *should* look like.
@@ -23,9 +26,9 @@ them to OpenCV images (aka numpy arrays).
 `test.py` *only* reproduces the problem when run via `stbt run` with
 `decklinksrc`, or when `decklinksrc` is running (even in a separate process):
 
-                                                    slave1  slave2
---------------------------------------------------  ------  ------
-stbt run (decklinksrc) test.py                      x 1-50  x 2.1k
+                                                    slave1  slave2  slave1+9.7.3  slave2+9.7.3
+--------------------------------------------------  ------  ------  ------------  ------------
+stbt run (decklinksrc) test.py                      x 1-50  x 2.1k  ✓ 31k...      ✓ 17k...
 stbt run (v4l2src) test.py                          ✓ 650k
 nohup python test.py &                              ✓ 12k   ✓ 26k
 stbt tv (decklinksrc) & python test.py              ✓ 1k
@@ -43,4 +46,3 @@ Further things to try:
 
 * Check bugzilla & recent commits to decklinksrc.
 * Run stbt run under valgrind.
-* Upgrade blackmagic driver.
